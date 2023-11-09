@@ -16,11 +16,14 @@ def getLLMResponse(form_input, email_sender, email_recipient, email_style):
     # C  Transformers offers support for various open-source models,
     # among them popular ones like Llama, GPT4All-J, MPT, and Falcon.
 
-    # C Transformers is the Python library that provides bindings for transformer models implemented in C/C++ using the GGML library
+    # C Transformers is the Python library that provides bindings for transformer models
+    # implemented in C/C++ using the GGML library
     model_path = os.getenv("MODEL_PATH")
     full_path = os.path.join(model_path, "llama-2-7b-chat.ggmlv3.q8_0.bin")
-    llm = CTransformers(model=full_path, model_type='llama', config={'max_new_tokens': 256,
-                                                                     'temperature': 0.01})
+
+    llm = CTransformers(model=full_path, model_type='llama',
+                        config={'max_new_tokens': 256,
+                                'temperature': 0.01})
 
     # Template for building the prompt
     template = """
@@ -67,4 +70,5 @@ submit = st.button('Generate')
 
 # When Generate Button is clicked
 if submit:
-    st.write(getLLMResponse(form_input, email_sender, email_recipient, email_style))
+    st.write(getLLMResponse(form_input, email_sender,
+             email_recipient, email_style))
