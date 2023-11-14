@@ -115,10 +115,13 @@ def create_docs(user_pdf_list):
 
 def create_docs_llama2(user_pdf_list):
     llm_extracted_data = []
+    invoice_number = 1
     for filename in user_pdf_list:
         raw_data = get_pdf_text(filename)
 
         llm_extracted_data.append(extracted_data_llama2(raw_data))
+        print(f"Details for Invoice number - {invoice_number}")
         print(llm_extracted_data)
+        invoice_number += 1
 
     return llm_extracted_data
