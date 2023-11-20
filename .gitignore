@@ -3,3 +3,5 @@ Applications/.DS_Store
 Applications/.DS_Store
 Applications/HR-ResumeScreening/__pycache__/utils.cpython-311.pyc
 LLama2/InvoiceExtractor/__pycache__/utils.cpython-311.pyc
+LLama2/MedicalBot/.chainlit
+LLama2/MedicalBot/__pycache__
