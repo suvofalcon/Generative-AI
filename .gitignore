@@ -7,3 +7,4 @@ LLama2/MedicalBot/.chainlit
 LLama2/MedicalBot/__pycache__
 Applications/CSVDataAnalysis/__pycache__/utils.cpython-311.pyc
 LANGCHAIN-APPS/ChatWithPDFFiles/__pycache__
+LANGCHAIN-APPS/ChatWithMultiplePDF/__pycache__/model.cpython-311.pyc
