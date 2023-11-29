@@ -36,7 +36,7 @@ def read_code_file(file):
 # Initialize OpenAI
 def initialize_llm():
 
-    llm = OpenAI(engine='text-davinci-003', temperature=1,
+    llm = OpenAI(model_name='text-davinci-003', temperature=1,
                  max_tokens = 512,
                  openai_api_key = OPENAI_API_KEY)
 
@@ -66,7 +66,7 @@ def design_doc_generation_prompt(code_data):
         template = code_summary
     )
 
-    code_steps = """Please explain the working of the code below in a detailed step by step manner :\n{code_data}
+    code_steps = """Please explain the working of the code below in a detailed point wise step by step manner :\n{code_data}
 
     YOUR RESPONSE:
     """
@@ -80,7 +80,7 @@ def design_doc_generation_prompt(code_data):
 
 
 # Construct the required chains and execute the prompts
-def construct_execute_chain(model, lang_template, summary_template, steps_template):
+def construct_execute_chain(model, lang_template, summary_template, steps_template, source):
 
     # construct the chains for sequential execution
     language_chain = LLMChain(llm=model, prompt=lang_template, output_key="lang")
@@ -93,7 +93,7 @@ def construct_execute_chain(model, lang_template, summary_template, steps_templa
                                   output_variables=['lang', 'summary', 'steps'],
                                   verbose=True)
 
-    response = final_chain(code_data)
+    response = final_chain(source)
 
     return response
 
@@ -109,7 +109,7 @@ generate_btn = st.button("Generate Documentation")
 if generate_btn:
     
     # read the source file contents
-    code_contents = read_code_file()
+    code_contents = read_code_file(source_file)
 
     # get the prompts 
     language, summary, detailed_steps = design_doc_generation_prompt(code_data=code_contents)
@@ -119,9 +119,16 @@ if generate_btn:
 
     # execute the prompts on llm
     response = construct_execute_chain(model=llm, lang_template=language, 
-                                       summary_template=summary, steps_template=detailed_steps)
+                                       summary_template=summary, steps_template=detailed_steps,
+                                       source=code_contents)
 
-    st.write()
+    st.write(f"The programming language is - {response['lang']}")
+    st.markdown(''' --- ''')
+    st.write(f"Summary Description of the Code - \n")
+    st.write(response['summary'])
+    st.markdown(''' --- ''') 
+    st.write(f"Detailed Stepwise Description - \n")
+    st.write(response['steps'])
+    st.markdown(''' --- ''')
 
-st.markdown(''' --- ''')
-st.success("Done!!")
+    st.success("Done!!")
