@@ -3,7 +3,7 @@
 import streamlit as st
 import os
 
-st.set_page_config(page_title="Generative AI powered Applications", page_icon=":robot:")
+st.set_page_config(page_title="Generative AI powered Applications", page_icon=":robot:", layout='wide')
 st.header("Proof of Concepts - Possibilities with Generative AI", divider=True)
 
 st.subheader("Following Technologies are used - ")
