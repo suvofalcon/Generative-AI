@@ -16,7 +16,7 @@ def query_agent(data, query):
     df = pd.read_csv(data)
 
     # Initialize the llm
-    llm = OpenAI()
+    llm = OpenAI(openai_api_key=OPENAI_API_KEY)
 
     # create a pandas dataframe agent
     agent = create_pandas_dataframe_agent(llm, df, verbose=True)
