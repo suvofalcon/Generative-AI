@@ -11,10 +11,10 @@ st.subheader("Following Technologies are used - ")
 st.markdown('''
 
     - [Streamlit](https://streamlit.io)
-    - [LangChain](https://python.langchain.com) Abstraction APIs
+    - [LangChain](https://python.langchain.com) Abstraction APIs on LLMs
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
     - [LLama2 7B Quantized Model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main) LLM Model
-    - [Opensource Embedding (all-MiniLM-L6-V2)](https://huggingface.co/sentence-transformers/all-MiniLM-L6-V2) Sentence Transformer Model
+    - [Opensource Embedding (all-MiniLM-L6-V2)](https://huggingface.co/sentence-transformers/all-MiniLM-L6-V2) Sentence Transformer Model from HuggingFace
     - [Vector Store - FAISS](https://ai.meta.com/tools/faiss/) - Facebook AI Similarity Search
 
 ''')
