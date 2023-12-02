@@ -15,7 +15,7 @@ st.markdown('''
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
     - [LLama2 7B Quantized Model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main) LLM Model
     - [Opensource Embedding (all-MiniLM-L6-V2)](https://huggingface.co/sentence-transformers/all-MiniLM-L6-V2) Sentence Transformer Model from HuggingFace
-    - [Vector Store - FAISS](https://ai.meta.com/tools/faiss/) - Facebook AI Similarity Search
+    - [Vector Store - FAISS](https://ai.meta.com/tools/faiss/) - Facebook AI Similarity Search by Meta
 
 ''')
 
@@ -41,9 +41,12 @@ This has been currently tested for Python , Java, C/C++ and COBOL only, but may 
 This has two implementations
 - Using OpenAI Embedding and OpenAI Davinci Model   
 - Using open source embedding Model from HuggingFace and LLama2 7B Quantized Model
-- This also uses FAISS as the vector store for Similarity Search Query
+  
+Both the above approaches uses FAISS as the vector store for Similarity Search Query
 
-This builds a natural language based interation using the power of Generative AI on custom documents , such has KEDB, SOPs, Ticket Descriptions and even large text based logs and traces.
+This builds a natural language based interaction using the power of Generative AI on custom documents - such has KEDB, SOPs, Ticket Descriptions and even large text based logs and traces.
+
+Currently the POC implements dealing with multiple PDF files as the knowledge source
 
  ---
 
