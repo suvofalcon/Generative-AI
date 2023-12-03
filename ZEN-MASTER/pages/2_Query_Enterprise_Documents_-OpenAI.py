@@ -1,22 +1,21 @@
-# Library imports...
-
+# OpenAI implementation imports ######################################################################
 import streamlit as st
+import tempfile
 import os
 from PyPDF2 import PdfReader
-
-# OpenAI implementation imports ######################################################################
-from langchain.text_splitter import CharacterTextSplitter
+from streamlit_chat import message
 from langchain.vectorstores import FAISS
+from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms.openai import OpenAI
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains.question_answering import load_qa_chain
 from langchain.callbacks import get_openai_callback
 
-
 # Read the important configurations and constants ###################################################
 openai_key = os.getenv("OPENAI_API_KEY")
 DB_FAISS_PATH = os.path.join(os.getenv("HOME"),
                              "vectorstores/multipdf/db_faiss")
+
 
 # Open AI Specific Implementation Functions #########################################################
 
@@ -72,14 +71,13 @@ def perform_search_return_results(key, query, vector_store):
 
             return response
 
-
-
 # Common UI Elements ################################################################################
 st.header("Chat with Knowledge Documents :open_file_folder:")
 st.subheader("Use the power of LLM to query your Knowledge Base")
 
 # Create tabs
-tab_titles = ['Query OpenAI (OpenAI Embeddings + FAISS)', 'Query Llama2 (HF Embeddings + ChromaDB)']
+tab_titles = ['Create Vector Store (OpenI Embeddings + FAISS)', 'Query OpenAI']
+
 tabs = st.tabs(tab_titles)
 
 # OpenAI Implementation Code ########################################################################
@@ -91,7 +89,7 @@ with tabs[0]:  # OpenAI Implementation Code
     if "vectorStore" not in st.session_state:
         st.session_state['vectorStore'] = ''    
 
-    st.subheader("Create Vector Store on your Documents...")
+    st.subheader("Create Vector Store on your Documents - using OpenAI Embeddings")
     pdf_docs = st.file_uploader("Upload the PDF Files here and click on 'Process'", type='pdf',
                                 accept_multiple_files=True)
     process_button = st.button("Process Vector Store")
@@ -110,26 +108,31 @@ with tabs[0]:  # OpenAI Implementation Code
             st.session_state['vectorStore'] = vector_store
             st.session_state['conversation'] = "processed"
 
-            st.success("Done!!")
+            st.success('Done...')
 
-    st.markdown(''' --- ''')
-
-    st.subheader("Query on your Documents :books:")
+# Query OpenAI Implementation Code #################################################################################
+with tabs[1]:
+    
+    st.subheader("Query on your Documents using OpenAI")
     text_input = st.text_area("Enter your Query")
     response_btn = st.button("Generate Response")
 
-    # Get the respone by button            
-    if response_btn:
+    with st.spinner("Getting Responser from OpenAI..."):
+        # Get the respone by button            
+        if response_btn:
 
-        if st.session_state['conversation'] == "processed":
-            # We will the search on the store and get the response from LLM
-            response = perform_search_return_results(key=openai_key, query=text_input, vector_store=st.session_state['vectorStore'])
+            if st.session_state['conversation'] == "processed":
+                # We will the search on the store and get the response from LLM
+                response = perform_search_return_results(key=openai_key, query=text_input, vector_store=st.session_state['vectorStore'])
             
-            st.write(response)
+                st.write(response)
 
 
-# LLama2 Implementation Code #################################################################################
-with tabs[1]:  # Llama2 Implementation Code
 
-    st.write("LLama2 Here")
 
+
+ 
+
+
+
+            
