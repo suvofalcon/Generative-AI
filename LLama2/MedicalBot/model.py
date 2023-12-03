@@ -46,7 +46,7 @@ def load_llm():
     # load the locally downloaded model here
     llm = CTransformers(model=MODEL_PATH,
                         model_type="llama",
-                        max_new_tokens=512,
+                        max_new_tokens=2048,
                         temperature=0.5)
     return llm
 
