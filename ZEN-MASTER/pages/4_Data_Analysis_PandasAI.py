@@ -8,22 +8,24 @@ from pandasai import SmartDataframe
 
 st.title("Chat on CSV file - Powered by LLM")
 
+
 # Function to chat with OpenAI on the CSV through PandasAI
 def chat_with_csv(data_frame, prompt):
 
     # Initialize OpenAI and PandasAI
     llm = OpenAI(api_token=os.getenv("OPENAI_API_KEY"))
-    #pandas_ai = PandasAI(llm)
+    # pandas_ai = PandasAI(llm)
     df = SmartDataframe(data_frame, config={"llm": llm, "verbose": True})
     result = df.chat(prompt)
 
     # Send the result to LLM
-    #result = pandas_ai.run(data_frame, prompt=prompt)
+    # result = pandas_ai.run(data_frame, prompt=prompt)
     print(result)
-    
     return result
 
-input_csv = st.file_uploader("Upload CSV File", type=['csv'], accept_multiple_files=False)
+
+input_csv = st.file_uploader("Upload CSV File", type=[
+                             'csv'], accept_multiple_files=False)
 
 if input_csv is not None:
 
@@ -49,4 +51,3 @@ if input_csv is not None:
                 result = chat_with_csv(data, input_query)
 
                 st.write(result)
-
