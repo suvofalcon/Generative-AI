@@ -11,6 +11,7 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 # Get the Keys
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+
 def query_agent(data, query):
     # Parse the CSV file and create a pandas dataframe from its contents
     df = pd.read_csv(data)
@@ -21,9 +22,11 @@ def query_agent(data, query):
     # create a pandas dataframe agent
     agent = create_pandas_dataframe_agent(llm, df, verbose=True)
 
-    # Python REPL: A Python shell used to evaluating and executing Python commands.
-    # It takes python code as input and outputs the result. The input python code can be generated from another tool in the LangChain
-    return agent.run(query)  # returning the response that is coming for our query
+    # A Python shell used to evaluating and executing Python commands.
+    # It takes python code as input and outputs the result. The input python
+    # code can be generated from another tool in the LangChain
+    # returning the response that is coming for our query
+    return agent.run(query)
 
 
 # UI Begins from here...
@@ -32,7 +35,8 @@ st.title("Data Analysis on CSV 🔍")
 st.subheader("Please Upload your CSV File...:file_folder: ")
 
 # Capture the CSV file
-data = st.file_uploader("Upload CSV File", type=['csv'], accept_multiple_files=False)
+data = st.file_uploader("Upload CSV File", type=[
+                        'csv'], accept_multiple_files=False)
 
 query = st.text_area("Enter your Query")
 button = st.button("Response")
@@ -42,4 +46,3 @@ if button:
         # Get Response
         answer = query_agent(data, query)
         st.write(answer)
-
