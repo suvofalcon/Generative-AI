@@ -4,6 +4,7 @@ import streamlit as st
 import os
 import pandas as pd
 from pandasai.llm.openai import OpenAI
+# from pandasai import PandasAI
 from pandasai import SmartDataframe
 
 st.title("Chat on CSV file - Powered by LLM")
@@ -22,6 +23,18 @@ def chat_with_csv(data_frame, prompt):
     # result = pandas_ai.run(data_frame, prompt=prompt)
     print(result)
     return result
+
+
+# Function to use pandasai directly for the data analysis
+# def query_on_csv(data_frame, prompt):
+#
+#    # Initialize OpenAI and PandasAI
+#    llm = OpenAI(api_token=os.getenv("OPENAI_API_KEY"))
+#    pandasai = PandasAI(llm)
+#
+#    result = pandasai.run(data_frame, prompt)
+#
+#    return result
 
 
 input_csv = st.file_uploader("Upload CSV File", type=[
@@ -48,6 +61,7 @@ if input_csv is not None:
                 st.info("Your Query: "+input_query)
 
                 # pass the result
+                # result = query_on_csv(data, input_query)
                 result = chat_with_csv(data, input_query)
 
                 st.write(result)
