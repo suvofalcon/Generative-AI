@@ -1,6 +1,5 @@
 # OpenAI implementation imports ######################################################################
 import streamlit as st
-import tempfile
 import os
 from PyPDF2 import PdfReader
 from streamlit_chat import message
@@ -33,7 +32,7 @@ def get_pdf_text(pdf_docs):
 
 # Create chunks from PDF text
 def create_chunks_from_pdfText(pdf_text):
-    
+
     text_splitter = CharacterTextSplitter(separator="\n",
                                           chunk_size=1000,
                                           chunk_overlap=200,
@@ -49,7 +48,7 @@ def create_vector_store_from_chunks(openai_key, text_chunks):
     # Initialize embeddings
     embedding = OpenAIEmbeddings(openai_api_key=openai_key)
     vector_store = FAISS.from_texts(text_chunks, embedding)
-    
+
     vector_store.save_local(DB_FAISS_PATH)
 
     return vector_store
@@ -87,7 +86,7 @@ with tabs[0]:  # OpenAI Implementation Code
         st.session_state['conversation'] = ''
 
     if "vectorStore" not in st.session_state:
-        st.session_state['vectorStore'] = ''    
+        st.session_state['vectorStore'] = ''
 
     st.subheader("Create Vector Store on your Documents - using OpenAI Embeddings")
     pdf_docs = st.file_uploader("Upload the PDF Files here and click on 'Process'", type='pdf',
@@ -101,7 +100,7 @@ with tabs[0]:  # OpenAI Implementation Code
             pdf_text = get_pdf_text(pdf_docs=pdf_docs)
 
             chunks = create_chunks_from_pdfText(pdf_text=pdf_text)
-                
+
             vector_store = create_vector_store_from_chunks(openai_key, chunks)
 
             st.write(f"Total Number of Chunks - **{len(chunks)}**")
@@ -112,27 +111,27 @@ with tabs[0]:  # OpenAI Implementation Code
 
 # Query OpenAI Implementation Code #################################################################################
 with tabs[1]:
-    
+
     st.subheader("Query on your Documents using OpenAI")
     text_input = st.text_area("Enter your Query")
     response_btn = st.button("Generate Response")
 
     with st.spinner("Getting Responser from OpenAI..."):
-        # Get the respone by button            
+        # Get the respone by button
         if response_btn:
 
             if st.session_state['conversation'] == "processed":
                 # We will the search on the store and get the response from LLM
                 response = perform_search_return_results(key=openai_key, query=text_input, vector_store=st.session_state['vectorStore'])
-            
+
                 st.write(response)
 
 
 
 
 
- 
 
 
 
-            
+
+

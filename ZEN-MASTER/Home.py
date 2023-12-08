@@ -1,10 +1,9 @@
 # Library imports
 
 import streamlit as st
-import os
 
 st.set_page_config(page_title="Generative AI powered Applications", page_icon=":robot:", layout='wide')
-st.header("Proof of Concepts - Possibilities with Generative AI", divider=True)
+st.header("Proof of Concepts - Possibilities with Generative AI :robot_face:", divider=True)
 
 st.subheader("Following Technologies are used - ")
 
@@ -21,11 +20,11 @@ st.markdown('''
 
 st.markdown('''
 
-### Application Details 
+### Application Details
 
 #### 1 - Code Documentation Generator
 
-This uses OpenAI Davinci Model (v3.5) to generate Detailed Documentation of Source code. This includes 
+This uses OpenAI Davinci Model (v3.5) to generate Detailed Documentation of Source code. This includes
 - Identification of Programming Language.
 - Creating a summary of the code functionality
 - Detailed Step by Step Explanation of what is happening in each line of the code
@@ -39,9 +38,9 @@ This has been currently tested for Python , Java, C/C++ and COBOL only, but may 
 #### 2 - Work with Knowledge Documents
 
 This has two implementations
-- Using OpenAI Embedding and OpenAI Davinci Model   
+- Using OpenAI Embedding and OpenAI Davinci Model
 - Using open source embedding Model from HuggingFace and LLama2 7B Quantized Model
-  
+
 Both the above approaches uses FAISS as the vector store for Similarity Search Query
 
 This builds a natural language based interaction using the power of Generative AI on custom documents - such has KEDB, SOPs, Ticket Descriptions and even large text based logs and traces.
