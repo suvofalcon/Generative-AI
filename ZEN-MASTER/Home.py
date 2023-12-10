@@ -2,8 +2,10 @@
 
 import streamlit as st
 
-st.set_page_config(page_title="Generative AI powered Applications", page_icon=":robot:", layout='wide')
-st.header("Proof of Concepts - Possibilities with Generative AI :robot_face:", divider=True)
+st.set_page_config(page_title="Generative AI powered Applications",
+                   page_icon=":robot:", layout='wide')
+st.header(
+    "Proof of Concepts - Possibilities with Generative AI :robot_face:", divider=True)
 
 st.subheader("Following Technologies are used - ")
 
@@ -54,4 +56,16 @@ Currently the POC implements dealing with multiple PDF files as the knowledge so
  This uses LLM to put a natural language based query interface on a dataset. This has been currently implemented using CSV files as the data source, but can directly work with database tables and structures - Both relational and NoSQL.
 
 ---
+
+#### 4 - Video Script Writer
+
+This uses LLM OpenAI to generate a script and title for any video on a desired object. The content of the script and title is obtained by a thorough search on the given topic using DuckDuckGo Search
+
+---
+
+#### 5 - Work with Knowledge Documents 
+
+This is implented using GooglePalm LLM and GooglePalm embedding using Pinecone as the vector store.
+This builds a natural language based interaction using the power of Generative AI on custom documents - such has KEDB, SOPs etc. For now the implementation is dealing with multiple PDF files
+
 ''')
