@@ -2,7 +2,6 @@
 import streamlit as st
 import os
 from PyPDF2 import PdfReader
-from streamlit_chat import message
 from langchain.vectorstores import FAISS
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms.openai import OpenAI
@@ -22,9 +21,9 @@ DB_FAISS_PATH = os.path.join(os.getenv("HOME"),
 def get_pdf_text(pdf_docs):
 
     text = ""
-    for pdf in pdf_docs: # read every pdf in the list uploaded
+    for pdf in pdf_docs:  # read every pdf in the list uploaded
         pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages: # for every page in the pdf being read
+        for page in pdf_reader.pages:  # for every page in the pdf being read
             text += page.extract_text()
 
     return text
@@ -70,6 +69,7 @@ def perform_search_return_results(key, query, vector_store):
 
             return response
 
+
 # Common UI Elements ################################################################################
 st.header("Chat with Knowledge Documents :open_file_folder:")
 st.subheader("Use the power of LLM to query your Knowledge Base")
@@ -88,7 +88,8 @@ with tabs[0]:  # OpenAI Implementation Code
     if "vectorStore" not in st.session_state:
         st.session_state['vectorStore'] = ''
 
-    st.subheader("Create Vector Store on your Documents - using OpenAI Embeddings")
+    st.subheader(
+        "Create Vector Store on your Documents - using OpenAI Embeddings")
     pdf_docs = st.file_uploader("Upload the PDF Files here and click on 'Process'", type='pdf',
                                 accept_multiple_files=True)
     process_button = st.button("Process Vector Store")
@@ -122,16 +123,7 @@ with tabs[1]:
 
             if st.session_state['conversation'] == "processed":
                 # We will the search on the store and get the response from LLM
-                response = perform_search_return_results(key=openai_key, query=text_input, vector_store=st.session_state['vectorStore'])
+                response = perform_search_return_results(
+                    key=openai_key, query=text_input, vector_store=st.session_state['vectorStore'])
 
                 st.write(response)
-
-
-
-
-
-
-
-
-
-
