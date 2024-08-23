@@ -19,6 +19,9 @@ st.markdown('''
     - [Streamlit](https://streamlit.io)
     - [LangChain](https://python.langchain.com) Abstraction APIs on LLMs
     - [OpenAI](https://platform.openai.com/docs/models) LLM Model
+    - [Google GenerativeAI](https://ai.google/discover/generativeai/) LLM Model
+    - Vector Databases
+        - [Pinecone](https://www.pinecone.io/)
 
 ''')
 
@@ -26,7 +29,7 @@ st.markdown('''
 
 ### Application Details
 
-#### 1 - Code Documentation Generator
+#### 1 - Code Documentation Generator (OpenAI)
 
 This uses OpenAI Davinci Model (v3.5) to generate Detailed Documentation of Source code. This includes
 - Identification of Programming Language.
@@ -38,5 +41,11 @@ This may be useful for teams during Transition to generate documentation for app
 This has been currently tested for Python , Java, C/C++ and COBOL only, but may work for other additional programming languages also.
 
  ---
+
+
+#### 2 - Query Enterprise Documents (Google PaLM2 + Pinecone)
+
+- This uses a simple RAG (Retreival - Augmented - Generation) Architecture to query Enterprise Documents... As of now it is taking a PDF Files and extracting only the texts
+- This uses PineCone as the vector Database and uses Google PaLM embeddings
 
 ''')
